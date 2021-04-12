@@ -418,10 +418,11 @@ namespace UnityGLTF
 		/// <returns>An absolute path that has the required extension</returns>
 		private string GetFileName(string absolutePathThatMayHaveExtension, string requiredExtension)
 		{
+			if (!requiredExtension.StartsWith(".", StringComparison.Ordinal))
+				requiredExtension = "." + requiredExtension;
+
 			if (!Path.GetExtension(absolutePathThatMayHaveExtension).Equals(requiredExtension, StringComparison.OrdinalIgnoreCase))
-			{
-				return absolutePathThatMayHaveExtension + "." + requiredExtension;
-			}
+				return absolutePathThatMayHaveExtension + requiredExtension;
 
 			return absolutePathThatMayHaveExtension;
 		}
